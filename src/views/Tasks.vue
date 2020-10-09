@@ -22,45 +22,35 @@
 			<div class="task-list">
 				<h2>Today</h2>
 			</div>
-			<div class="task-list__todo">
-				<div class="task-list__left">
-					<input type="checkbox" />
-					<p>Call dad</p>
-				</div>
-				<div class="task-list__right">
-					<img
-						src="@/assets/icons/time_icon.svg"
-					/>
-					<p>12:30</p>
-				</div>
-			</div>
-
-			<div
-				class="task-list__todo completed"
-			>
-				<div class="task-list__left">
-					<input
-						type="checkbox"
-						checked
-					/>
-					<p>Call dad</p>
-				</div>
-				<div class="task-list__right">
-					<img
-						src="@/assets/icons/time_icon.svg"
-					/>
-					<p>12:30</p>
-				</div>
-			</div>
+			<TodoItem
+				task="Call dad"
+				time="12:30"
+				isCompleted="true"
+				priority="medium"
+			/>
+			<TodoItem
+				task="Send CV to peter"
+				time="13:30"
+				isCompleted="false"
+				priority="low"
+			/>
+			<TodoItem
+				task="Pick pulled oats"
+				time="18:30"
+				isCompleted="false"
+				priority="high"
+			/>
 		</div>
 	</div>
 </template>
 <script>
 import Button from '@/components/Button.vue'
+import TodoItem from '@/components/TodoItem.vue'
 export default {
 	name: 'Tasks',
 	components: {
 		Button,
+		TodoItem,
 	},
 }
 document.title = 'Tasks'
@@ -82,38 +72,5 @@ img {
 }
 .task-list {
 	margin-top: 20px;
-}
-.task-list__todo {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-.task-list__left {
-	display: flex;
-	align-items: center;
-	flex: 0.8;
-}
-
-.task-list__left p {
-	margin: 0;
-	margin-left: 10px;
-}
-.task-list__right {
-	display: flex;
-	flex: 0.2;
-	align-items: center;
-}
-.task-list__right p {
-	font-size: 1.5rem;
-	color: #a4b0cb;
-	margin: 0;
-	margin-left: 5px;
-}
-
-.completed {
-	opacity: 0.7;
-}
-.completed p {
-	color: #a4b0cb;
 }
 </style>
