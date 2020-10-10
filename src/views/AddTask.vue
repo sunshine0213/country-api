@@ -10,48 +10,22 @@
 			<p class="sub-text">
 				26th October 2020
 			</p>
-			<img
-				src="@/assets/empty_illustration.svg"
-				class="home__hero-image"
-			/>
-			<p>
-				Your task list for today looks
-				empty
-			</p>
+
 			<Button label="Add a task" />
 			<div class="task-list">
 				<h2>Today</h2>
 			</div>
-			<TodoItem
-				task="Call dad"
-				time="12:30"
-				isCompleted
-				priority="medium"
-			/>
-			<TodoItem
-				task="Send CV to peter"
-				time="13:30"
-				priority="low"
-			/>
-			<TodoItem
-				task="Pick pulled oats"
-				time="18:30"
-				priority="high"
-			/>
 		</div>
 	</div>
 </template>
 <script>
 import Button from '@/components/Button.vue'
-import TodoItem from '@/components/TodoItem.vue'
 export default {
-	name: 'Tasks',
+	name: 'AddTask',
 	components: {
 		Button,
-		TodoItem,
 	},
 }
-document.title = 'Tasks'
 </script>
 <style scoped>
 .tasks {

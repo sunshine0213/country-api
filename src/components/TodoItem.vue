@@ -1,5 +1,10 @@
 <template>
-	<div class="task-list__todo">
+	<div
+		class="task-list__todo"
+		v-bind:class="{
+			completed: isCompleted,
+		}"
+	>
 		<div class="task-list__left">
 			<input type="checkbox" />
 			<p>{{ task }}</p>
