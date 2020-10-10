@@ -1,13 +1,31 @@
 <template>
 	<div
 		class="task-list__todo"
-		v-bind:class="{
-			completed: isCompleted,
-		}"
+		:class="{ completed: isCompleted }"
 	>
-		<div class="task-list__left">
-			<input type="checkbox" />
-			<p>{{ task }}</p>
+		<div
+			class="task-list__left"
+			v-on:blur="edit(id)"
+		>
+			<input
+				type="checkbox"
+				:checked="isCompleted"
+				v-on:change="complete(id)"
+			/>
+			<input
+				type="text"
+				class="input-edit"
+				v-if="isEditing"
+				v-model="task"
+				@blur="edit(id)"
+				v-focus
+			/>
+			<p
+				v-if="!isEditing"
+				v-on:dblclick="edit(id)"
+			>
+				{{ task }}
+			</p>
 		</div>
 		<div class="task-list__right">
 			<div class="task-list__right-top">
@@ -28,10 +46,22 @@
 export default {
 	name: 'TodoItem',
 	props: {
+		id: String,
 		task: String,
 		isCompleted: Boolean,
 		time: String,
 		priority: String,
+		isEditing: Boolean,
+		complete: Function,
+		edit: Function,
+	},
+	directives: {
+		focus: {
+			// directive definition
+			inserted: function(el) {
+				el.focus()
+			},
+		},
 	},
 }
 </script>
@@ -78,5 +108,15 @@ export default {
 }
 .completed p {
 	color: #a4b0cb;
+}
+.input-edit {
+	border: none;
+	font-family: 'Nunito', sans-serif;
+	font-size: 2rem;
+	color: #1a1b1d;
+	border: 1px solid #79a8ed;
+	border-radius: 6px;
+	padding: 5px 10px;
+	margin-left: 10px;
 }
 </style>

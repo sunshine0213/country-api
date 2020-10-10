@@ -12,7 +12,24 @@
 				>
 				it today!
 			</h1>
-			<Button label="Lets do it" />
+			<Button
+				v-if="!isStart"
+				label="Lets do it"
+				v-bind:onClick="onStart"
+			/>
+			<div
+				v-if="isStart"
+				class="home__start"
+			>
+				<InputText
+					label="What should I call you?"
+					placeholder="full name"
+				/>
+				<Button
+					v-if="isStart"
+					label="I'm ready"
+				/>
+			</div>
 		</div>
 	</div>
 </template>
@@ -21,13 +38,20 @@
 // @ is an alias to /src
 //import HelloWorld from '@/components/HelloWorld.vue'
 import Button from '@/components/Button.vue'
+import InputText from '@/components/InputText.vue'
 
 export default {
 	name: 'Home',
-	components: { Button },
+	components: { Button, InputText },
+	data: function() {
+		return {
+			isNewUser: true,
+			isStart: false,
+		}
+	},
 	methods: {
 		onStart: function() {
-			console.log('hello')
+			this.isStart = true
 		},
 	},
 }
