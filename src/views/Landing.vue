@@ -9,8 +9,12 @@
       </h1>
       <Button v-if="!isStart" label="Lets do it" v-bind:onClick="onStart" />
       <div v-if="isStart" class="landing__start">
-        <InputText label="What should I call you?" placeholder="full name" />
-        <Button v-if="isStart" label="I'm ready" />
+        <InputText
+          label="What should I call you?"
+          v-bind:model="firstName"
+          placeholder="full name"
+        />
+        <Button v-if="isStart" v-bind:onClick="onReady" label="I'm ready" />
       </div>
     </div>
   </div>
@@ -22,6 +26,12 @@
 import Button from "@/components/Button.vue";
 import InputText from "@/components/InputText.vue";
 
+const getFromLocal = localStorage.getItem("taskapp");
+if (getFromLocal) {
+  this.isNewUser = false;
+  this.isStart = true;
+}
+
 export default {
   name: "Landing",
   components: { Button, InputText },
@@ -29,11 +39,15 @@ export default {
     return {
       isNewUser: true,
       isStart: false,
+      firstName: "",
     };
   },
   methods: {
     onStart: function () {
       this.isStart = true;
+    },
+    onReady: function () {
+      console.log("I am ready", this.firstName);
     },
   },
 };
