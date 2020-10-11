@@ -1,29 +1,36 @@
 <template>
-	<div class="input-text">
+	<div class="input-dropdown">
 		<label class="input-label">
 			{{ label }}
 		</label>
-		<input
-			type="text"
-			class="input-box"
-			placeholder="placeholder"
-		/>
+		<select
+			class="dropdown-options"
+			id="cars"
+			name="cars"
+		>
+			<option
+				v-for="time in value"
+				v-bind:key="time"
+				>{{ time }}</option
+			>
+		</select>
 	</div>
 </template>
 <script>
 export default {
-	name: 'InputText',
+	name: 'InputDropdown',
 	props: {
 		label: String,
 		placeholder: String,
+		value: [],
 	},
 }
 </script>
 <style scoped>
-.input-text {
+.input-dropdown {
 	margin-top: 20px;
 }
-.input-box {
+.dropdown-options {
 	margin-top: 15px;
 	border: none;
 	font-family: 'Nunito', sans-serif;

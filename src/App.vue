@@ -5,7 +5,7 @@
 				>Home</router-link
 			>
 			|
-			<router-link to="/tasks"
+			<router-link to="/home"
 				>Tasks</router-link
 			>
 		</div>
@@ -15,6 +15,7 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
 :root {
 	font-size: 8px;
 }

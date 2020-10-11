@@ -1,122 +1,98 @@
 <template>
-	<div class="tasks">
-		<div class="tasks__inner">
-			<h1>
-				Hello
-				<span class="primary-highlight"
-					>Bikash!</span
-				>
-			</h1>
-			<p class="sub-text">
-				26th October 2020
-			</p>
-			<img
-				src="@/assets/empty_illustration.svg"
-				class="home__hero-image"
-			/>
-			<p v-on:click="complete(2)">
-				Your task list for today looks
-				empty
-			</p>
-			<Button label="Add a task" />
-			<div class="task-list">
-				<h2>Today</h2>
-			</div>
+  <div class="tasks">
+    <div class="tasks__inner">
+      <div class="task-list">
+        <h2>Today</h2>
+      </div>
 
-			<TodoItem
-				v-for="item in items"
-				v-bind:key="item.id"
-				v-bind="item"
-				v-bind:complete="complete"
-				v-bind:edit="edit"
-			/>
-		</div>
-	</div>
+      <TodoItem
+        v-for="item in items"
+        v-bind:key="item.id"
+        v-bind="item"
+        v-bind:complete="complete"
+        v-bind:edit="edit"
+      />
+    </div>
+  </div>
 </template>
 <script>
-import { uuid } from 'vue-uuid'
+import { uuid } from "vue-uuid";
 
-import Button from '@/components/Button.vue'
-import TodoItem from '@/components/TodoItem.vue'
+import TodoItem from "@/components/TodoItem.vue";
 export default {
-	name: 'Tasks',
-	components: {
-		Button,
-		TodoItem,
-	},
-	data: function() {
-		return {
-			items: [
-				{
-					id: uuid.v4(),
-					task: 'Call dad',
-					time: '12:30',
-					isCompleted: false,
-					isEditing: false,
-					priority: 'high',
-				},
-				{
-					id: uuid.v4(),
-					task: 'Send CV to peter',
-					time: '14:30',
-					isCompleted: false,
-					isEditing: false,
-					priority: 'medium',
-				},
-				{
-					id: uuid.v4(),
-					task: 'Make a video',
-					time: '18:30',
-					isCompleted: false,
-					isEditing: false,
-					priority: 'low',
-				},
-			],
-		}
-	},
-	methods: {
-		complete: function(id) {
-			const _items = this.items.map(
-				(item) => {
-					if (item.id === id) {
-						item.isCompleted = !item.isCompleted
-					}
-					return item
-				},
-			)
-			this.items = [..._items]
-		},
-		edit: function(id) {
-			const _items = this.items.map(
-				(item) => {
-					if (item.id === id) {
-						item.isEditing = !item.isEditing
-					}
-					return item
-				},
-			)
-			this.items = [..._items]
-		},
-	},
-}
-document.title = 'Tasks'
+  name: "Tasks",
+  components: {
+    TodoItem,
+  },
+  data: function () {
+    return {
+      items: [
+        {
+          id: uuid.v4(),
+          task: "Call dad",
+          time: "12:30",
+          isCompleted: false,
+          isEditing: false,
+          priority: "high",
+        },
+        {
+          id: uuid.v4(),
+          task: "Send CV to peter",
+          time: "14:30",
+          isCompleted: false,
+          isEditing: false,
+          priority: "medium",
+        },
+        {
+          id: uuid.v4(),
+          task: "Make a video",
+          time: "18:30",
+          isCompleted: false,
+          isEditing: false,
+          priority: "low",
+        },
+      ],
+    };
+  },
+  methods: {
+    complete: function (id) {
+      const _items = this.items.map((item) => {
+        if (item.id === id) {
+          item.isCompleted = !item.isCompleted;
+        }
+        return item;
+      });
+      this.items = [..._items];
+    },
+    edit: function (id) {
+      const _items = this.items.map((item) => {
+        if (item.id === id) {
+          item.isEditing = !item.isEditing;
+        }
+        return item;
+      });
+      this.items = [..._items];
+    },
+  },
+};
+document.title = "Tasks";
 </script>
 <style scoped>
 .tasks {
-	margin: 40px 30px;
+  margin: 40px 30px;
 }
 .tasks__inner {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .tasks p {
-	margin-top: 0px;
+  margin-top: 0px;
 }
 img {
-	margin: 20px 0;
+  margin: 20px 0;
 }
 .task-list {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 </style>

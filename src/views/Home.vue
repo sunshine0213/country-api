@@ -1,74 +1,46 @@
 <template>
-	<div class="home">
-		<div class="home__inner">
-			<img
-				src="@/assets/time_illustration.svg"
-				class="home__hero-image"
-			/>
-			<h1>
-				Tomorrow never comes
-				<span class="primary-highlight"
-					>Let’s do</span
-				>
-				it today!
-			</h1>
-			<Button
-				v-if="!isStart"
-				label="Lets do it"
-				v-bind:onClick="onStart"
-			/>
-			<div
-				v-if="isStart"
-				class="home__start"
-			>
-				<InputText
-					label="What should I call you?"
-					placeholder="full name"
-				/>
-				<Button
-					v-if="isStart"
-					label="I'm ready"
-				/>
-			</div>
-		</div>
-	</div>
+  <div class="home">
+    <div class="home__inner">
+      <h1>
+        Hello
+        <span class="primary-highlight">Bikash!</span>
+      </h1>
+      <p class="sub-text">26th October 2020</p>
+      <img src="@/assets/empty_illustration.svg" class="home__hero-image" />
+      <p v-on:click="complete(2)">Your task list for today looks empty</p>
+      <Button label="Add a task" />
+    </div>
+  </div>
 </template>
-
 <script>
-// @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
-import Button from '@/components/Button.vue'
-import InputText from '@/components/InputText.vue'
-
+import Button from "@/components/Button.vue";
 export default {
-	name: 'Home',
-	components: { Button, InputText },
-	data: function() {
-		return {
-			isNewUser: true,
-			isStart: false,
-		}
-	},
-	methods: {
-		onStart: function() {
-			this.isStart = true
-		},
-	},
-}
-document.title = 'Home'
+  name: "Home",
+  components: {
+    Button,
+  },
+  data: function () {
+    return {};
+  },
+};
+document.title = "Home";
 </script>
 <style scoped>
 .home {
-	margin: 40px 30px;
+  margin: 40px 30px;
 }
 .home__inner {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.home .home__hero-image {
-	margin-bottom: 20px;
-	display: flex;
-	justify-content: center;
+.home p {
+  margin-top: 0px;
+}
+img {
+  margin: 20px 0;
+}
+.task-list {
+  margin-top: 20px;
 }
 </style>
