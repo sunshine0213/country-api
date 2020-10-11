@@ -1,27 +1,33 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '@/views/Home.vue'
+import Landing from '@/views/Landing.vue'
 import Tasks from '@/views/Tasks.vue'
-import AddTask from '../views/AddTask.vue'
+import AddTask from '@/views/AddTask.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Landing',
+    component: Landing
   },
   {
-    path: '/tasks',
-    name: 'Tasks',
+    path: '/home',
+    name: 'Home',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: Tasks,
+    component: Home,
     children: [
-      { path: '', component: Tasks },
+      { path: '/tasks', component: Tasks },
       { path: 'add', component: AddTask },]
+  },
+  {
+    path: '/add',
+    name: 'Add',
+    component: AddTask,
   }
 ]
 
