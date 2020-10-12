@@ -1,13 +1,15 @@
 <template>
   <div class="input-text">
-    <label class="input-label">
+    <label v-if="label" class="input-label">
       {{ label }}
     </label>
     <input
       type="text"
       class="input-box"
       placeholder="placeholder"
-      v-model.lazy="model"
+      v-bind:value="model"
+      v-on:input="$emit('input', $event.target.value)"
+      v-focus
     />
   </div>
 </template>
@@ -18,6 +20,24 @@ export default {
     label: String,
     placeholder: String,
     model: String,
+  },
+  data: function () {
+    return {
+      inputValue: "",
+    };
+  },
+  methods: {
+    inputChange: function () {
+      console.log("input value", this.inputValue);
+    },
+  },
+  directives: {
+    focus: {
+      // directive definition
+      inserted: function (el) {
+        el.focus();
+      },
+    },
   },
 };
 </script>

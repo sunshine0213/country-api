@@ -7,11 +7,11 @@
         <span class="primary-highlight">Let’s do</span>
         it today!
       </h1>
-      <Button v-if="!isStart" label="Lets do it" v-bind:onClick="onStart" />
+      <Button v-if="isNewUser" label="Lets do it" v-bind:onClick="onStart" />
       <div v-if="isStart" class="landing__start">
         <InputText
           label="What should I call you?"
-          v-bind:model="firstName"
+          v-model="firstName"
           placeholder="full name"
         />
         <Button v-if="isStart" v-bind:onClick="onReady" label="I'm ready" />
@@ -25,29 +25,66 @@
 //import HelloWorld from '@/components/HelloWorld.vue'
 import Button from "@/components/Button.vue";
 import InputText from "@/components/InputText.vue";
-
-const getFromLocal = localStorage.getItem("taskapp");
-if (getFromLocal) {
-  this.isNewUser = false;
-  this.isStart = true;
-}
-
+import { uuid } from "vue-uuid";
 export default {
   name: "Landing",
   components: { Button, InputText },
+  mounted: function () {
+    this.firstName = this.getFromLocal().firstName;
+    this.isNewUser = this.getFromLocal().isNewUser;
+    this.isStart = this.getFromLocal().isStart;
+  },
   data: function () {
     return {
       isNewUser: true,
       isStart: false,
       firstName: "",
+      jpt: "",
     };
   },
   methods: {
     onStart: function () {
       this.isStart = true;
+      this.jpt = uuid.v4();
     },
     onReady: function () {
-      console.log("I am ready", this.firstName);
+      const taskapp = {
+        firstName: this.firstName,
+        items: [
+          // {
+          //   id: uuid.v4(),
+          //   task: "Call dad",
+          //   time: "12:30",
+          //   isCompleted: false,
+          //   isEditing: false,
+          //   priority: "high",
+          // },
+          // {
+          //   id: uuid.v4(),
+          //   task: "Send CV to peter",
+          //   time: "14:30",
+          //   isCompleted: false,
+          //   isEditing: false,
+          //   priority: "medium",
+          // },
+          // {
+          //   id: uuid.v4(),
+          //   task: "Make a video",
+          //   time: "18:30",
+          //   isCompleted: false,
+          //   isEditing: false,
+          //   priority: "low",
+          // },
+        ],
+        isNewUser: false,
+        isStart: false,
+      };
+      localStorage.setItem("taskapp", JSON.stringify(taskapp));
+      this.$router.push("/dashboard/tasks");
+    },
+    getFromLocal: function () {
+      const _local = JSON.parse(localStorage.getItem("taskapp"));
+      return _local;
     },
   },
 };

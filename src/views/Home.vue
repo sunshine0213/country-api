@@ -3,12 +3,25 @@
     <div class="home__inner">
       <h1>
         Hello
-        <span class="primary-highlight">Bikash!</span>
+        <span class="primary-highlight">{{ firstName }}!</span>
       </h1>
+
       <p class="sub-text">26th October 2020</p>
-      <img src="@/assets/empty_illustration.svg" class="home__hero-image" />
-      <p v-on:click="complete(2)">Your task list for today looks empty</p>
-      <Button label="Add a task" />
+      <img
+        v-if="items.length < 1 && !isAddTask"
+        src="@/assets/empty_illustration.svg"
+        class="home__hero-image"
+      />
+      <p v-if="items.length < 1 && !isAddTask">
+        Your task list for today looks empty
+      </p>
+      <Button
+        v-if="items.length < 1 && !isAddTask"
+        v-bind:onClick="toAddView"
+        label="Add a task"
+      />
+
+      <router-view />
     </div>
   </div>
 </template>
@@ -19,8 +32,22 @@ export default {
   components: {
     Button,
   },
+  mounted: function () {
+    if (this.$router.currentRoute.name) {
+      this.isAddTask = true;
+    }
+  },
   data: function () {
-    return {};
+    return {
+      firstName: JSON.parse(localStorage.getItem("taskapp")).firstName,
+      items: JSON.parse(localStorage.getItem("taskapp")).items,
+      isAddTask: false,
+    };
+  },
+  methods: {
+    toAddView: function () {
+      this.$router.push("/dashboard/add");
+    },
   },
 };
 document.title = "Home";
