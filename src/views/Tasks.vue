@@ -16,8 +16,6 @@
   </div>
 </template>
 <script>
-import { uuid } from "vue-uuid";
-
 import TodoItem from "@/components/TodoItem.vue";
 export default {
   name: "Tasks",
@@ -26,32 +24,7 @@ export default {
   },
   data: function () {
     return {
-      items: [
-        {
-          id: uuid.v4(),
-          task: "Call dad",
-          time: "12:30",
-          isCompleted: false,
-          isEditing: false,
-          priority: "high",
-        },
-        {
-          id: uuid.v4(),
-          task: "Send CV to peter",
-          time: "14:30",
-          isCompleted: false,
-          isEditing: false,
-          priority: "medium",
-        },
-        {
-          id: uuid.v4(),
-          task: "Make a video",
-          time: "18:30",
-          isCompleted: false,
-          isEditing: false,
-          priority: "low",
-        },
-      ],
+      items: JSON.parse(localStorage.getItem("taskapp")).items,
     };
   },
   methods: {
@@ -63,6 +36,9 @@ export default {
         return item;
       });
       this.items = [..._items];
+      let _taskapp = JSON.parse(localStorage.getItem("taskapp"));
+      _taskapp = { ..._taskapp, items: _items };
+      localStorage.setItem("taskapp", JSON.stringify(_taskapp));
     },
     edit: function (id) {
       const _items = this.items.map((item) => {

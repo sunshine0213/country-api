@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 import Home from '@/views/Home.vue'
 import Landing from '@/views/Landing.vue'
 import Tasks from '@/views/Tasks.vue'
 import AddTask from '@/views/AddTask.vue'
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
 const routes = [
   {
@@ -14,24 +14,26 @@ const routes = [
     component: Landing
   },
   {
-    path: '/home',
-    name: 'Home',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: '/dashboard',
+    name: 'Dashboard',
     component: Home,
     children: [
-      { path: '/tasks', component: Tasks },
-      { path: 'add', component: AddTask },]
-  },
-  {
-    path: '/add',
-    name: 'Add',
-    component: AddTask,
+      {
+        path: 'tasks',
+        name: 'tasks',
+        component: Tasks,
+      },
+      {
+        path: 'add',
+        name: 'add',
+        component: AddTask,
+      }
+    ]
   }
+
 ]
 
-const router = new VueRouter({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes

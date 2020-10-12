@@ -1,122 +1,116 @@
 <template>
-	<div
-		class="task-list__todo"
-		:class="{ completed: isCompleted }"
-	>
-		<div
-			class="task-list__left"
-			v-on:blur="edit(id)"
-		>
-			<input
-				type="checkbox"
-				:checked="isCompleted"
-				v-on:change="complete(id)"
-			/>
-			<input
-				type="text"
-				class="input-edit"
-				v-if="isEditing"
-				v-model="task"
-				@blur="edit(id)"
-				v-focus
-			/>
-			<p
-				v-if="!isEditing"
-				v-on:dblclick="edit(id)"
-			>
-				{{ task }}
-			</p>
-		</div>
-		<div class="task-list__right">
-			<div class="task-list__right-top">
-				<img
-					src="@/assets/icons/time_icon.svg"
-				/>
-				<p>{{ time }}</p>
-			</div>
-			<div
-				class="task-list__right-bottom"
-			>
-				<p>{{ priority }}</p>
-			</div>
-		</div>
-	</div>
+  <div class="task-list__todo" :class="{ completed: isCompleted }">
+    <div class="task-list__left" v-on:blur="edit(id)">
+      <input
+        type="checkbox"
+        :checked="isCompleted"
+        v-on:change="complete(id)"
+      />
+      <input
+        type="text"
+        class="input-edit"
+        v-if="isEditing"
+        v-model="taskValue"
+        @blur="edit(id)"
+        v-focus
+      />
+
+      <p v-if="!isEditing" v-on:dblclick="edit(id)">
+        {{ task }}
+      </p>
+    </div>
+    <div class="task-list__right">
+      <div class="task-list__right-top">
+        <img src="@/assets/icons/time_icon.svg" />
+        <p>{{ time }}</p>
+      </div>
+      <div class="task-list__right-bottom">
+        <p>{{ priority }}</p>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
-	name: 'TodoItem',
-	props: {
-		id: String,
-		task: String,
-		isCompleted: Boolean,
-		time: String,
-		priority: String,
-		isEditing: Boolean,
-		complete: Function,
-		edit: Function,
-	},
-	directives: {
-		focus: {
-			// directive definition
-			inserted: function(el) {
-				el.focus()
-			},
-		},
-	},
-}
+  name: "TodoItem",
+  components: {},
+  props: {
+    id: String,
+    task: String,
+    isCompleted: Boolean,
+    time: String,
+    priority: String,
+    isEditing: Boolean,
+    complete: Function,
+    edit: Function,
+  },
+  data: function () {
+    return {
+      taskValue: this.task,
+    };
+  },
+  directives: {
+    focus: {
+      // directive definition
+      inserted: function (el) {
+        el.focus();
+      },
+    },
+  },
+};
 </script>
 <style scoped>
 .task-list__todo {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-	margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 5px;
 }
 .task-list__left {
-	display: flex;
-	align-items: center;
-	flex: 0.8;
+  display: flex;
+  align-items: center;
+  flex: 0.8;
 }
 
 .task-list__left p {
-	margin: 0;
-	margin-left: 10px;
+  margin: 0;
+  margin-left: 10px;
 }
 .task-list__right {
-	display: flex;
-	flex: 0.2;
-	align-items: flex-end;
-	flex-direction: column;
+  display: flex;
+  flex: 0.2;
+  align-items: flex-end;
+  flex-direction: column;
 }
 .task-list__right-top {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 .task-list__right-bottom {
-	display: flex;
-	justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 .task-list__right p {
-	font-size: 1.5rem;
-	color: #a4b0cb;
-	margin: 0;
-	margin-left: 5px;
+  font-size: 1.5rem;
+  color: #a4b0cb;
+  margin: 0;
+  margin-left: 5px;
 }
 
 .completed {
-	opacity: 0.7;
+  opacity: 0.7;
 }
 .completed p {
-	color: #a4b0cb;
+  color: #a4b0cb;
 }
 .input-edit {
-	border: none;
-	font-family: 'Nunito', sans-serif;
-	font-size: 2rem;
-	color: #1a1b1d;
-	border: 1px solid #79a8ed;
-	border-radius: 6px;
-	padding: 5px 10px;
-	margin-left: 10px;
+  border: none;
+  font-family: "Nunito", sans-serif;
+  font-size: 2rem;
+  color: #1a1b1d;
+  border: 1px solid #79a8ed;
+  border-radius: 6px;
+  padding: 5px 10px;
+  margin-left: 10px;
 }
 </style>
