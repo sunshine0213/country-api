@@ -45,20 +45,6 @@ export default {
 	components: {
 		Button,
 	},
-	beforeRouteEnter(to, from, next) {
-		if (
-			JSON.parse(
-				localStorage.getItem('taskapp'),
-			).firstName !== ''
-		) {
-			next()
-		} else {
-			to('/')
-		}
-		// called before the route that renders this component is confirmed.
-		// does NOT have access to `this` component instance,
-		// because it has not been created yet when this guard is called!
-	},
 	mounted: function() {
 		if (
 			this.$router.currentRoute.name ==
