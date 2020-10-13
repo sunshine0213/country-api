@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/views/Home.vue'
+import Dashboard from '@/views/Dashboard.vue'
 import Landing from '@/views/Landing.vue'
 import Tasks from '@/views/Tasks.vue'
 import AddTask from '@/views/AddTask.vue'
@@ -16,7 +16,7 @@ const routes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Home,
+    component: Dashboard,
     children: [
       {
         path: 'tasks',
