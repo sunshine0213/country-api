@@ -19,7 +19,7 @@ const routes = [
     component: Dashboard,
     children: [
       {
-        path: 'tasks',
+        path: '/',
         name: 'tasks',
         component: Tasks,
       },
@@ -33,10 +33,25 @@ const routes = [
 
 ]
 
+
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
+router.beforeEach((to, from, next) => {
+  const firstName = JSON.parse(localStorage.getItem('taskapp'))
+  if (to.fullPath === '/dashboard') {
+    if (!firstName) {
+      next('/');
+    }
+  }
+  if (to.fullPath === '/') {
+    if (firstName && firstName !== '') {
+      next('/dashboard');
+    }
+  }
+  next();
+});
 
 export default router

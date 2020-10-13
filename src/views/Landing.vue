@@ -49,11 +49,6 @@ export default {
 		this.firstName = this.getFromLocal().firstName
 		this.isNewUser = this.getFromLocal().isNewUser
 		this.isStart = this.getFromLocal().isStart
-		if (this.firstName !== '') {
-			this.$router.push(
-				'/dashboard/tasks',
-			)
-		}
 	},
 	data: function() {
 		return {
@@ -105,9 +100,7 @@ export default {
 				'taskapp',
 				JSON.stringify(taskapp),
 			)
-			this.$router.push(
-				'/dashboard/tasks',
-			)
+			this.$router.push('/dashboard')
 		},
 		getFromLocal: function() {
 			const _local = JSON.parse(
