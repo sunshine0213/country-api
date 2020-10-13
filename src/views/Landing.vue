@@ -24,7 +24,7 @@
 				<InputText
 					label="What should I call you?"
 					v-model="firstName"
-					placeholder="full name"
+					placeholder="Full name"
 				/>
 				<Button
 					v-if="isStart"
