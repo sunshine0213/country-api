@@ -5,8 +5,8 @@
 		</label>
 		<select
 			class="dropdown-options"
-			id="cars"
-			name="cars"
+			id="time"
+			name="time"
 		>
 			<option
 				v-for="time in value"

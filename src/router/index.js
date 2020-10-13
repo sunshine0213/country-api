@@ -46,6 +46,16 @@ router.beforeEach((to, from, next) => {
       next('/');
     }
   }
+  if (to.fullPath === '/dashboard/add') {
+    if (!firstName) {
+      next('/');
+    }
+  }
+  if (to.fullPath === '/dashboard/tasks') {
+    if (!firstName) {
+      next('/');
+    }
+  }
   if (to.fullPath === '/') {
     if (firstName && firstName !== '') {
       next('/dashboard');
