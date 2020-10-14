@@ -3,6 +3,7 @@
 		<label class="input-label">
 			{{ label }}
 		</label>
+		
 		<div class="radio-options">
 			<div
 				v-for="item in value"
@@ -14,6 +15,12 @@
 					:id="item.id"
 					:name="name"
 					:value="item.value"
+					v-on:input="
+				$emit(
+					'input',
+					$event.target.value,
+				)
+			"
 				/>
 				<label
 					class="option-label"

@@ -1,8 +1,10 @@
 <template>
 	<div class="tasks">
+		{{task}}
 		<InputText
 			label="What would you like to do?"
-			placeholder="E.g Email CV to Peter"
+			placeholder="E.g Email CV to Peter"	
+			v-model="task"		
 		/>
 		<InputDropdown
 			label="Time"
@@ -63,6 +65,10 @@ export default {
 		return {
 			time: getTime(),
 			priorityOptions: priorityOptions,
+			task:'',
+			taskTime:'',
+			priority:''
+
 		}
 	},
 	methods: {
