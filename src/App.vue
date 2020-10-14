@@ -54,4 +54,15 @@ p {
 .sub-text {
 	color: #a4b0cb;
 }
+.vs__dropdown-toggle {
+    /* -webkit-appearance: none; */
+    -moz-appearance: none;
+    /* appearance: none; */
+    display: flex;
+    /* padding: 0 0 4px; */
+    background: none;
+    border: 0px solid rgba(60,60,60,.26)!important; 
+    /* border-radius: 4px; */
+    /* white-space: normal; */
+}
 </style>

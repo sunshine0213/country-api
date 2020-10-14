@@ -4,6 +4,7 @@ import Dashboard from '@/views/Dashboard.vue'
 import Landing from '@/views/Landing.vue'
 import Tasks from '@/views/Tasks.vue'
 import AddTask from '@/views/AddTask.vue'
+import NoPage from '@/views/NoPage.vue'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ const routes = [
         component: AddTask,
       }
     ]
+  },
+  {
+    path: '*',
+    name: 'No path',
+    component: NoPage,
   }
 
 ]
@@ -47,11 +53,6 @@ router.beforeEach((to, from, next) => {
     }
   }
   if (to.fullPath === '/dashboard/add') {
-    if (!firstName) {
-      next('/');
-    }
-  }
-  if (to.fullPath === '/dashboard/tasks') {
     if (!firstName) {
       next('/');
     }
