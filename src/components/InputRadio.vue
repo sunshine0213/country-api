@@ -15,12 +15,8 @@
 					:id="item.id"
 					:name="name"
 					:value="item.value"
-					v-on:input="
-				$emit(
-					'input',
-					$event.target.value,
-				)
-			"
+					v-model="testValue"
+					v-onChange="onChange(testValue)"
 				/>
 				<label
 					class="option-label"
@@ -33,12 +29,20 @@
 </template>
 <script>
 export default {
-	name: 'InputRadio',
+	name: 'InputRadio',	
 	props: {
 		label: String,
 		value: [],
 		name: String,
+		onChange:Function,
 	},
+	data:function(){
+		return{
+			testValue:''
+			
+		}
+	},
+	
 }
 </script>
 <style scoped>

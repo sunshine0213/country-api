@@ -1,21 +1,25 @@
 <template>
 	<div class="tasks">
-		{{task}}
+	
 		<InputText
 			label="What would you like to do?"
 			placeholder="E.g Email CV to Peter"	
 			v-model="task"		
 		/>
-		<InputDropdown
-			label="Time"
-			v-bind:value="time"
-		/>
+	<label class="input-label" >
+			Time
+		</label>
+		<vSelect class="dropdown-options" v-model="taskTime" :options="time"></vSelect>
+		
 		<InputRadio
 			label="Priority"
 			name="priority"
 			v-bind:value="priorityOptions"
+			v-bind:selectedRadioValue="priority"
+			v-bind:onChange='radioChange'			
 		/>
-		<Button label="Add to the list" />
+	
+		<Button label="Add to the list" v-bind:onClick="addTask"/>
 		<Button
 			label="Cancel"
 			variant="secondary"
@@ -27,8 +31,10 @@
 <script>
 import Button from '@/components/Button.vue'
 import InputText from '@/components/InputText.vue'
-import InputDropdown from '@/components/InputDropdown.vue'
 import InputRadio from '@/components/InputRadio.vue'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+import { uuid } from "vue-uuid";
 const getTime = function() {
 	const timeValue = []
 	for (let i = 0; i < 12; i++) {
@@ -58,8 +64,8 @@ export default {
 	components: {
 		Button,
 		InputText,
-		InputDropdown,
 		InputRadio,
+		vSelect,
 	},
 	data: function() {
 		return {
@@ -75,6 +81,27 @@ export default {
 		cancel: function() {
 			this.$router.go(-1)
 		},
+		radioChange:function(value){
+			this.priority=value
+		},
+		addTask:function(){
+			const newTask={
+				id:uuid.v4(),
+            task: this.task,
+            time: this.taskTime,
+            isCompleted: false,
+            isEditing: false,
+            priority: this.priority,
+			}
+			let _taskapp = JSON.parse(localStorage.getItem("taskapp"));
+			const _items=_taskapp.items			
+			_items.push(newTask)
+			_taskapp={..._taskapp, items:_items}
+			console.log(_taskapp)
+			localStorage.setItem("taskapp", JSON.stringify(_taskapp))
+			this.$router.push('/dashboard')
+			
+		}
 	},
 }
 </script>
@@ -96,4 +123,19 @@ img {
 .task-list {
 	margin-top: 20px;
 }
+.dropdown-options {
+	margin-top: 15px;
+	border: none;
+	font-family: 'Nunito', sans-serif;
+	font-size: 2rem;
+	color: #a4b0cb;
+	border: 1px solid #a4b0cb;
+	width: 100%;
+	padding: 10px;
+	border-radius: 6px;
+}
+.input-label{
+	margin-top:15px!important;
+}
+
 </style>
