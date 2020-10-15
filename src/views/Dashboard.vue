@@ -11,7 +11,12 @@
 			<p class="sub-text">
 				{{ currentDate }}
 			</p>
-			<p @click="logout" class="primary-highlight logout">Logout</p>
+			<p
+				@click="logout"
+				class="primary-highlight logout"
+			>
+				Logout
+			</p>
 			<img
 				v-if="
 					items.length < 1 && !isAddTask
@@ -103,13 +108,11 @@ export default {
 				day + ' ' + month + ' ' + year
 			return output
 		},
-		logout:function(){
+		logout: function() {
 			localStorage.removeItem('taskapp')
-			alert("You are logged out!")
-			this.$router.push(
-				'/',
-			)
-		}
+			alert('You are logged out!')
+			this.$router.push('/')
+		},
 	},
 }
 document.title = 'Home'
@@ -132,10 +135,10 @@ img {
 .task-list {
 	margin-top: 20px;
 }
-.logout{
+.logout {
 	cursor: pointer;
 }
-.logout:hover{
+.logout:hover {
 	color: #4887e4;
 }
 </style>
