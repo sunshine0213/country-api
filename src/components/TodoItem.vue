@@ -38,7 +38,14 @@
 			<div
 				class="task-list__right-bottom"
 			>
-				<p>{{ priority }}</p>
+				<img v-if="priority=='low'"
+				src=@/assets/icons/priority-low.svg
+				/> <img
+				v-if="priority=='medium'"
+				src=@/assets/icons/priority-medium.svg
+				/> <img v-if="priority=='high'"
+				src=@/assets/icons/priority-high.svg
+				/>
 			</div>
 		</div>
 	</div>
@@ -89,7 +96,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
-	margin-top: 5px;
+	margin-top: 15px;
 }
 .task-list__left {
 	display: flex;

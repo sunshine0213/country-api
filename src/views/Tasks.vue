@@ -1,102 +1,134 @@
 <template>
-  <div v-if="
-					items.length > 0
-				" class="tasks">
-    <div class="tasks__inner">
-      <div class="task-list">
-        <h2 v-if="itemsTodo.length > 0">Today</h2>
-      </div>
-       <TodoItem
-        v-for="item in itemsTodo"
-        v-bind:key="item.id"
-        v-bind="item"
-        v-bind:complete="complete"
-        v-bind:edit="edit"
-      />
-      <div class="task-list">
-        <h2 v-if="itemsCompleted.length > 0">Completed</h2>
-      </div>
-
-      <TodoItem
-        v-for="item in itemsCompleted"
-        v-bind:key="item.id"
-        v-bind="item"
-        v-bind:complete="complete"
-        v-bind:edit="edit"
-      />
-    </div>
-    <Button
-				
-				v-bind:onClick="toAddView"
-				label="Add" 
-        variant="primaryCircleFixed"      
+	<div
+		v-if="items.length > 0"
+		class="tasks"
+	>
+		<div class="tasks__inner">
+			<div class="task-list">
+				<h2 v-if="itemsTodo.length > 0">
+					Today
+				</h2>
+			</div>
+			<TodoItem
+				v-for="item in itemsTodo"
+				v-bind:key="item.id"
+				v-bind="item"
+				v-bind:complete="complete"
+				v-bind:edit="edit"
 			/>
+			<div class="task-list">
+				<h2
+					v-if="
+						itemsCompleted.length > 0
+					"
+				>
+					Completed
+				</h2>
+			</div>
 
-  </div>
+			<TodoItem
+				v-for="item in itemsCompleted"
+				v-bind:key="item.id"
+				v-bind="item"
+				v-bind:complete="complete"
+				v-bind:edit="edit"
+			/>
+		</div>
+		<Button
+			v-bind:onClick="toAddView"
+			label="Add"
+			variant="primaryCircleFixed"
+		/>
+	</div>
 </template>
 <script>
-import TodoItem from "@/components/TodoItem.vue";
-import Button from "@/components/Button.vue";
+import TodoItem from '@/components/TodoItem.vue'
+import Button from '@/components/Button.vue'
 export default {
-  name: "Tasks",
-  components: {
-    TodoItem,
-    Button
-  },
-  data: function () {
-    return {
-    items: JSON.parse(localStorage.getItem("taskapp")).items,
-     itemsCompleted:JSON.parse(localStorage.getItem("taskapp")).items.filter(item=>item.isCompleted==true),
-     itemsTodo:JSON.parse(localStorage.getItem("taskapp")).items.filter(item=>item.isCompleted==false)
-    };
-  },
-  methods: {
-    complete: function (id) {
-      const _items = this.items.map((item) => {
-        if (item.id === id) {
-          item.isCompleted = !item.isCompleted;
-        }
-        return item;
-      });
-      this.items = [..._items];
-      let _taskapp = JSON.parse(localStorage.getItem("taskapp"));
-      _taskapp = { ..._taskapp, items: _items };
-      localStorage.setItem("taskapp", JSON.stringify(_taskapp));
-    },
-    edit: function (id) {
-      const _items = this.items.map((item) => {
-        if (item.id === id) {
-          item.isEditing = !item.isEditing;
-        }
-        return item;
-      });
-      this.items = [..._items];
-    },
-    toAddView: function() {
-			this.$router.push('/dashboard/add')
+	name: 'Tasks',
+	components: {
+		TodoItem,
+		Button,
+	},
+	data: function() {
+		return {
+			items: JSON.parse(
+				localStorage.getItem('taskapp'),
+			).items,
+			itemsCompleted: JSON.parse(
+				localStorage.getItem('taskapp'),
+			).items.filter(
+				(item) =>
+					item.isCompleted == true,
+			),
+			itemsTodo: JSON.parse(
+				localStorage.getItem('taskapp'),
+			).items.filter(
+				(item) =>
+					item.isCompleted == false,
+			),
+		}
+	},
+	methods: {
+		complete: function(id) {
+			const _items = this.items.map(
+				(item) => {
+					if (item.id === id) {
+						item.isCompleted = !item.isCompleted
+					}
+					return item
+				},
+			)
+			this.items = [..._items]
+			let _taskapp = JSON.parse(
+				localStorage.getItem('taskapp'),
+			)
+			_taskapp = {
+				..._taskapp,
+				items: _items,
+			}
+			localStorage.setItem(
+				'taskapp',
+				JSON.stringify(_taskapp),
+			)
 		},
-
-  },
-};
-document.title = "Tasks";
+		edit: function(id) {
+			const _items = this.items.map(
+				(item) => {
+					if (item.id === id) {
+						item.isEditing = !item.isEditing
+					}
+					return item
+				},
+			)
+			this.items = [..._items]
+		},
+		toAddView: function() {
+			this.$router.push(
+				'/dashboard/add',
+			)
+		},
+	},
+}
+document.title = 'Tasks'
 </script>
 <style scoped>
 .tasks {
-  margin: 40px 30px;
-  position: relative;
+	margin: 40px 30px;
+	position: relative;
 }
 .tasks__inner {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .tasks p {
-  margin-top: 0px;
+	margin-top: 0px;
 }
 img {
-  margin: 20px 0;
+	margin: 20px 0;
 }
 .task-list {
-  margin-top: 20px;
+	margin-top: 20px;
 }
 </style>

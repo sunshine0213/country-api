@@ -3,7 +3,7 @@
 		<label class="input-label">
 			{{ label }}
 		</label>
-		
+
 		<div class="radio-options">
 			<div
 				v-for="item in value"
@@ -16,7 +16,9 @@
 					:name="name"
 					:value="item.value"
 					v-model="testValue"
-					v-on:change="onChange(testValue)"
+					v-on:change="
+						onChange(testValue)
+					"
 				/>
 				<label
 					class="option-label"
@@ -29,20 +31,18 @@
 </template>
 <script>
 export default {
-	name: 'InputRadio',	
+	name: 'InputRadio',
 	props: {
 		label: String,
 		value: [],
 		name: String,
-		onChange:Function,
+		onChange: Function,
 	},
-	data:function(){
-		return{
-			testValue:''
-			
+	data: function() {
+		return {
+			testValue: '',
 		}
 	},
-	
 }
 </script>
 <style scoped>
