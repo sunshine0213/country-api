@@ -17,6 +17,10 @@ body {
 	font-family: 'Nunito', sans-serif;
 	font-size: 2rem;
 }
+#app{
+	width:400px;
+	margin:auto;
+}
 a {
 	text-decoration: none;
 }
@@ -54,7 +58,12 @@ p {
 .sub-text {
 	color: #a4b0cb;
 }
-.vs__dropdown-toggle {
+.mx-input-wrapper {
+    position: relative;
+    width: 100%;
+		
+}
+.mx-input {
     /* -webkit-appearance: none; */
     -moz-appearance: none;
     /* appearance: none; */
@@ -64,5 +73,8 @@ p {
     border: 0px solid rgba(60,60,60,.26)!important; 
     /* border-radius: 4px; */
     /* white-space: normal; */
+		font-family: 'Nunito', sans-serif;
+	font-size: 16px!important;
+	color: #a4b0cb;
 }
 </style>
