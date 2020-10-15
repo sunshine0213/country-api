@@ -6,10 +6,24 @@
 			placeholder="E.g Email CV to Peter"	
 			v-model="task"		
 		/>
-	<label class="input-label" >
+	<p class="input-label" >
 			Time
-		</label>
-		<vSelect class="dropdown-options" v-model="taskTime" :options="time"></vSelect>
+		</p>
+		
+		<date-picker
+		class="select-time"
+      v-model="taskTime"
+      :time-picker-options="{
+        start: '06:00',
+        step: '00:30',
+        end: '22:30',
+      }"
+      format="hh:mm a"
+      type="time"
+      placeholder="hh:mm a"
+    ></date-picker>
+	
+		
 		
 		<InputRadio
 			label="Priority"
@@ -32,9 +46,9 @@
 import Button from '@/components/Button.vue'
 import InputText from '@/components/InputText.vue'
 import InputRadio from '@/components/InputRadio.vue'
-import vSelect from 'vue-select'
-import 'vue-select/dist/vue-select.css';
 import { uuid } from "vue-uuid";
+import DatePicker from 'vue2-datepicker'
+import 'vue2-datepicker/index.css';
 const getTime = function() {
 	const timeValue = []
 	for (let i = 0; i < 12; i++) {
@@ -65,14 +79,14 @@ export default {
 		Button,
 		InputText,
 		InputRadio,
-		vSelect,
+		DatePicker,
 	},
 	data: function() {
 		return {
 			time: getTime(),
 			priorityOptions: priorityOptions,
 			task:'',
-			taskTime:'',
+			taskTime:null,
 			priority:''
 
 		}
@@ -85,10 +99,13 @@ export default {
 			this.priority=value
 		},
 		addTask:function(){
+			if(this.task=='' || this.time=='' || this.priority==''){
+				alert("Enter all the fields")
+			}
 			const newTask={
 				id:uuid.v4(),
             task: this.task,
-            time: this.taskTime,
+            time: this.taskTime.toString(),
             isCompleted: false,
             isEditing: false,
             priority: this.priority,
@@ -123,7 +140,7 @@ img {
 .task-list {
 	margin-top: 20px;
 }
-.dropdown-options {
+.select-time {
 	margin-top: 15px;
 	border: none;
 	font-family: 'Nunito', sans-serif;
@@ -131,11 +148,17 @@ img {
 	color: #a4b0cb;
 	border: 1px solid #a4b0cb;
 	width: 100%;
-	padding: 10px;
+	padding:0px 10px;
 	border-radius: 6px;
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+
 }
+
 .input-label{
 	margin-top:15px!important;
+	text-align: left;
 }
 
 </style>

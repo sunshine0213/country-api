@@ -16,7 +16,7 @@
 					:name="name"
 					:value="item.value"
 					v-model="testValue"
-					v-onChange="onChange(testValue)"
+					v-on:change="onChange(testValue)"
 				/>
 				<label
 					class="option-label"

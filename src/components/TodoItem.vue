@@ -22,7 +22,7 @@
     <div class="task-list__right">
       <div class="task-list__right-top">
         <img src="@/assets/icons/time_icon.svg" />
-        <p>{{ time }}</p>
+        <p>{{ displayTime }}</p>
       </div>
       <div class="task-list__right-bottom">
         <p>{{ priority }}</p>
@@ -47,6 +47,7 @@ export default {
   data: function () {
     return {
       taskValue: this.task,
+      displayTime:this.getTime()
     };
   },
   directives: {
@@ -57,6 +58,14 @@ export default {
       },
     },
   },
+  methods:{
+    getTime:function(){
+      const date = new Date(this.time)
+     
+      return date.getHours('HH')+":" +date.getMinutes('MM')
+
+    }
+  }
 };
 </script>
 <style scoped>
