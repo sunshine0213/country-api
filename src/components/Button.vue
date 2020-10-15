@@ -46,4 +46,14 @@ export default {
   color: #ffffff;
   background-color: #79a8ed;
 }
+.primaryCircleFixed{
+  position:absolute;
+  right:0;
+  margin-top:50px;
+  width:50px;
+  height:50px;
+  border-radius: 50%;
+  filter: drop-shadow(0px 4px 10px rgba(121, 168, 237, 0.65));
+
+}
 </style>

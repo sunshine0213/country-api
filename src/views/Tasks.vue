@@ -1,30 +1,53 @@
 <template>
-  <div class="tasks">
+  <div v-if="
+					items.length > 0
+				" class="tasks">
     <div class="tasks__inner">
       <div class="task-list">
-        <h2>Today</h2>
+        <h2 v-if="itemsTodo.length > 0">Today</h2>
+      </div>
+       <TodoItem
+        v-for="item in itemsTodo"
+        v-bind:key="item.id"
+        v-bind="item"
+        v-bind:complete="complete"
+        v-bind:edit="edit"
+      />
+      <div class="task-list">
+        <h2 v-if="itemsCompleted.length > 0">Completed</h2>
       </div>
 
       <TodoItem
-        v-for="item in items"
+        v-for="item in itemsCompleted"
         v-bind:key="item.id"
         v-bind="item"
         v-bind:complete="complete"
         v-bind:edit="edit"
       />
     </div>
+    <Button
+				
+				v-bind:onClick="toAddView"
+				label="Add" 
+        variant="primaryCircleFixed"      
+			/>
+
   </div>
 </template>
 <script>
 import TodoItem from "@/components/TodoItem.vue";
+import Button from "@/components/Button.vue";
 export default {
   name: "Tasks",
   components: {
     TodoItem,
+    Button
   },
   data: function () {
     return {
-      items: JSON.parse(localStorage.getItem("taskapp")).items,
+    items: JSON.parse(localStorage.getItem("taskapp")).items,
+     itemsCompleted:JSON.parse(localStorage.getItem("taskapp")).items.filter(item=>item.isCompleted==true),
+     itemsTodo:JSON.parse(localStorage.getItem("taskapp")).items.filter(item=>item.isCompleted==false)
     };
   },
   methods: {
@@ -49,6 +72,10 @@ export default {
       });
       this.items = [..._items];
     },
+    toAddView: function() {
+			this.$router.push('/dashboard/add')
+		},
+
   },
 };
 document.title = "Tasks";
@@ -56,6 +83,7 @@ document.title = "Tasks";
 <style scoped>
 .tasks {
   margin: 40px 30px;
+  position: relative;
 }
 .tasks__inner {
   display: flex;
