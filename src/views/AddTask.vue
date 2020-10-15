@@ -124,7 +124,6 @@ export default {
 				..._taskapp,
 				items: _items,
 			}
-			console.log(_taskapp)
 			localStorage.setItem(
 				'taskapp',
 				JSON.stringify(_taskapp),
