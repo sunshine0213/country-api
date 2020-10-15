@@ -17,9 +17,9 @@ body {
 	font-family: 'Nunito', sans-serif;
 	font-size: 2rem;
 }
-#app{
-	width:400px;
-	margin:auto;
+#app {
+	width: 400px;
+	margin: auto;
 }
 a {
 	text-decoration: none;
@@ -59,22 +59,22 @@ p {
 	color: #a4b0cb;
 }
 .mx-input-wrapper {
-    position: relative;
-    width: 100%;
-		
+	position: relative;
+	width: 100%;
 }
 .mx-input {
-    /* -webkit-appearance: none; */
-    -moz-appearance: none;
-    /* appearance: none; */
-    display: flex;
-    /* padding: 0 0 4px; */
-    background: none;
-    border: 0px solid rgba(60,60,60,.26)!important; 
-    /* border-radius: 4px; */
-    /* white-space: normal; */
-		font-family: 'Nunito', sans-serif;
-	font-size: 16px!important;
+	/* -webkit-appearance: none; */
+	-moz-appearance: none;
+	/* appearance: none; */
+	display: flex;
+	/* padding: 0 0 4px; */
+	background: none;
+	border: 0px solid
+		rgba(60, 60, 60, 0.26) !important;
+	/* border-radius: 4px; */
+	/* white-space: normal; */
+	font-family: 'Nunito', sans-serif;
+	font-size: 16px !important;
 	color: #a4b0cb;
 }
 </style>

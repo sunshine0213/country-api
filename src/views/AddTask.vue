@@ -1,39 +1,41 @@
 <template>
 	<div class="tasks">
-	
 		<InputText
 			label="What would you like to do?"
-			placeholder="E.g Email CV to Peter"	
-			v-model="task"		
+			placeholder="E.g Email CV to Peter"
+			v-model="task"
 		/>
-	<p class="input-label" >
+		<p class="input-label">
 			Time
 		</p>
-		
+
 		<date-picker
-		class="select-time"
-      v-model="taskTime"
-      :time-picker-options="{
-        start: '06:00',
-        step: '00:30',
-        end: '22:30',
-      }"
-      format="hh:mm a"
-      type="time"
-      placeholder="hh:mm a"
-    ></date-picker>
-	
-		
-		
+			class="select-time"
+			v-model="taskTime"
+			:time-picker-options="{
+				start: '06:00',
+				step: '00:30',
+				end: '22:30',
+			}"
+			format="hh:mm a"
+			type="time"
+			placeholder="hh:mm a"
+		></date-picker>
+
 		<InputRadio
 			label="Priority"
 			name="priority"
 			v-bind:value="priorityOptions"
-			v-bind:selectedRadioValue="priority"
-			v-bind:onChange='radioChange'			
+			v-bind:selectedRadioValue="
+				priority
+			"
+			v-bind:onChange="radioChange"
 		/>
-	
-		<Button label="Add to the list" v-bind:onClick="addTask"/>
+
+		<Button
+			label="Add to the list"
+			v-bind:onClick="addTask"
+		/>
 		<Button
 			label="Cancel"
 			variant="secondary"
@@ -46,9 +48,9 @@
 import Button from '@/components/Button.vue'
 import InputText from '@/components/InputText.vue'
 import InputRadio from '@/components/InputRadio.vue'
-import { uuid } from "vue-uuid";
+import { uuid } from 'vue-uuid'
 import DatePicker from 'vue2-datepicker'
-import 'vue2-datepicker/index.css';
+import 'vue2-datepicker/index.css'
 const getTime = function() {
 	const timeValue = []
 	for (let i = 0; i < 12; i++) {
@@ -85,40 +87,50 @@ export default {
 		return {
 			time: getTime(),
 			priorityOptions: priorityOptions,
-			task:'',
-			taskTime:null,
-			priority:''
-
+			task: '',
+			taskTime: null,
+			priority: '',
 		}
 	},
 	methods: {
 		cancel: function() {
 			this.$router.go(-1)
 		},
-		radioChange:function(value){
-			this.priority=value
+		radioChange: function(value) {
+			this.priority = value
 		},
-		addTask:function(){
-			if(this.task=='' || this.time=='' || this.priority==''){
-				alert("Enter all the fields")
+		addTask: function() {
+			if (
+				this.task == '' ||
+				this.time == '' ||
+				this.priority == ''
+			) {
+				alert('Enter all the fields')
 			}
-			const newTask={
-				id:uuid.v4(),
-            task: this.task,
-            time: this.taskTime.toString(),
-            isCompleted: false,
-            isEditing: false,
-            priority: this.priority,
+			const newTask = {
+				id: uuid.v4(),
+				task: this.task,
+				time: this.taskTime.toString(),
+				isCompleted: false,
+				isEditing: false,
+				priority: this.priority,
 			}
-			let _taskapp = JSON.parse(localStorage.getItem("taskapp"));
-			const _items=_taskapp.items			
+			let _taskapp = JSON.parse(
+				localStorage.getItem('taskapp'),
+			)
+			const _items = _taskapp.items
 			_items.push(newTask)
-			_taskapp={..._taskapp, items:_items}
+			_taskapp = {
+				..._taskapp,
+				items: _items,
+			}
 			console.log(_taskapp)
-			localStorage.setItem("taskapp", JSON.stringify(_taskapp))
+			localStorage.setItem(
+				'taskapp',
+				JSON.stringify(_taskapp),
+			)
 			this.$router.push('/dashboard')
-			
-		}
+		},
 	},
 }
 </script>
@@ -148,17 +160,15 @@ img {
 	color: #a4b0cb;
 	border: 1px solid #a4b0cb;
 	width: 100%;
-	padding:0px 10px;
+	padding: 0px 10px;
 	border-radius: 6px;
-	display:flex;
+	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
 }
 
-.input-label{
-	margin-top:15px!important;
+.input-label {
+	margin-top: 15px !important;
 	text-align: left;
 }
-
 </style>
