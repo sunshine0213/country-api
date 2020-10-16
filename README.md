@@ -30,5 +30,5 @@
 <img src="public/screenshot/dev_dash_add_1.png" height="300px" />
 <img src="public/screenshot/dev_dash_tasks.png" height="300px" />
 <img src="public/screenshot/dev_dash_tasks_1.png" height="300px" />
-<img src="public/screenshot/dev_dash_tasks_edit.png" height="300px" />
+<img src="public/screenshot/dev_dash_task_edit.png" height="300px" />
 
