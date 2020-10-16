@@ -46,11 +46,13 @@
 </template>
 <script>
 import Button from '@/components/Button.vue'
+import { mapState } from 'vuex'
 export default {
 	name: 'Dashboard',
 	components: {
 		Button,
 	},
+	computed: mapState(['pageTitle']),
 	mounted: function() {
 		if (
 			this.$router.currentRoute.name ==
