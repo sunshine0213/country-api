@@ -41,28 +41,33 @@
 //import HelloWorld from '@/components/HelloWorld.vue'
 import Button from '@/components/Button.vue'
 import InputText from '@/components/InputText.vue'
-import { uuid } from 'vue-uuid'
+import {
+	mapActions,
+	mapState,
+} from 'vuex'
 export default {
 	name: 'Landing',
 	components: { Button, InputText },
+	computed: {
+		...mapState([
+			'firstName',
+			'isNewUser',
+			'isStart',
+		]),
+	},
 	mounted: function() {
-		this.firstName = this.getFromLocal().firstName
-		this.isNewUser = this.getFromLocal().isNewUser
-		this.isStart = this.getFromLocal().isStart
+		this.fetchLocalStorage()
 	},
 	data: function() {
-		return {
-			isNewUser: true,
-			isStart: false,
-			firstName: '',
-			jpt: '',
-		}
+		return {}
 	},
 	methods: {
+		...mapActions([
+			'fetchLocal',
+			'setStart',
+		]),
 		onStart: function() {
-			this.isStart = true
-			this.isNewUser = false
-			this.jpt = uuid.v4()
+			this.setStart()
 		},
 		onReady: function() {
 			const taskapp = {
@@ -82,6 +87,9 @@ export default {
 				localStorage.getItem('taskapp'),
 			)
 			return _local
+		},
+		fetchLocalStorage: function() {
+			this.fetchLocal()
 		},
 	},
 }

@@ -3,7 +3,21 @@
 		<router-view />
 	</div>
 </template>
-
+<script>
+import { mapActions } from 'vuex'
+export default {
+	name: 'App',
+	mounted: function() {
+		this.fetchLocalStorage()
+	},
+	methods: {
+		...mapActions(['fetchLocal']),
+		fetchLocalStorage: function() {
+			this.fetchLocal()
+		},
+	},
+}
+</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
