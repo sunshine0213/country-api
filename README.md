@@ -21,3 +21,14 @@
 
 ## Future plan
 - Implement back end with Google firebase
+
+## Screenshots
+<img src="public/screenshot/dev_home.png" height="300px" />
+<img src="public/screenshot/dev_home_start.png" height="300px" />
+<img src="public/screenshot/dev_dash_empty.png" height="300px" />
+<img src="public/screenshot/dev_dash_add.png" height="300px" />
+<img src="public/screenshot/dev_dash_add_1.png" height="300px" />
+<img src="public/screenshot/dev_dash_tasks.png" height="300px" />
+<img src="public/screenshot/dev_dash_tasks_1.png" height="300px" />
+<img src="public/screenshot/dev_dash_tasks_edit.png" height="300px" />
+
