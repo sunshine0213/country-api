@@ -4,10 +4,16 @@
 		class="tasks"
 	>
 		<div class="tasks__inner">
-			<div class="task-list">
-				<h2 v-if="todoTasks.length > 0">
+			<div
+				v-if="todoTasks.length > 0"
+				class="task-list"
+			>
+				<h2>
 					Today
 				</h2>
+				<span class="task-total">{{
+					todoTasks.length
+				}}</span>
 			</div>
 			<TodoItem
 				v-for="item in todoTasks"
@@ -17,14 +23,16 @@
 				v-bind:edit="edit"
 				v-bind:update="update"
 			/>
-			<div class="task-list">
-				<h2
-					v-if="
-						completedTasks.length > 0
-					"
-				>
+			<div
+				v-if="completedTasks.length > 0"
+				class="task-list"
+			>
+				<h2>
 					Completed
 				</h2>
+				<span class="task-total">{{
+					completedTasks.length
+				}}</span>
 			</div>
 
 			<TodoItem
@@ -77,7 +85,10 @@ export default {
 			this.toggleEdit(id)
 		},
 		update: function(id, value) {
-			this.updateTask(id, value)
+			this.updateTask({
+				id: id,
+				value: value,
+			})
 		},
 
 		toAddView: function() {
@@ -107,5 +118,11 @@ img {
 }
 .task-list {
 	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.task-total {
+	color: #a4b0cb;
 }
 </style>
