@@ -50,7 +50,6 @@ export default {
 	components: { Button, InputText },
 	computed: {
 		...mapState([
-			'firstName',
 			'isNewUser',
 			'isStart',
 		]),
@@ -59,34 +58,23 @@ export default {
 		this.fetchLocalStorage()
 	},
 	data: function() {
-		return {}
+		return {
+			firstName: '',
+		}
 	},
 	methods: {
 		...mapActions([
 			'fetchLocal',
 			'setStart',
+			'setFirstName',
 		]),
 		onStart: function() {
 			this.setStart()
 		},
 		onReady: function() {
-			const taskapp = {
-				firstName: this.firstName,
-				items: [],
-				isNewUser: false,
-				isStart: false,
-			}
-			localStorage.setItem(
-				'taskapp',
-				JSON.stringify(taskapp),
-			)
+			this.setFirstName(this.firstName)
+
 			this.$router.push('/dashboard')
-		},
-		getFromLocal: function() {
-			const _local = JSON.parse(
-				localStorage.getItem('taskapp'),
-			)
-			return _local
 		},
 		fetchLocalStorage: function() {
 			this.fetchLocal()

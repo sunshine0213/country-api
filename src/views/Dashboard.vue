@@ -46,13 +46,20 @@
 </template>
 <script>
 import Button from '@/components/Button.vue'
-import { mapState } from 'vuex'
+import {
+	mapState,
+	mapActions,
+} from 'vuex'
 export default {
 	name: 'Dashboard',
 	components: {
 		Button,
 	},
-	computed: mapState(['pageTitle']),
+	computed: mapState([
+		'pageTitle',
+		'firstName',
+		'items',
+	]),
 	mounted: function() {
 		if (
 			this.$router.currentRoute.name ==
@@ -67,17 +74,12 @@ export default {
 	},
 	data: function() {
 		return {
-			firstName: JSON.parse(
-				localStorage.getItem('taskapp'),
-			).firstName,
-			items: JSON.parse(
-				localStorage.getItem('taskapp'),
-			).items,
 			isAddTask: false,
 			currentDate: '',
 		}
 	},
 	methods: {
+		...mapActions(['logout']),
 		toAddView: function() {
 			this.isAddTask = true
 			this.$router.push(
@@ -110,10 +112,8 @@ export default {
 				day + ' ' + month + ' ' + year
 			return output
 		},
-		logout: function() {
-			localStorage.removeItem('taskapp')
-			alert('You are logged out!')
-			this.$router.push('/')
+		userLogout: function() {
+			this.logout()
 		},
 	},
 }

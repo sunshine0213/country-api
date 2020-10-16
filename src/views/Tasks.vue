@@ -5,12 +5,12 @@
 	>
 		<div class="tasks__inner">
 			<div class="task-list">
-				<h2 v-if="itemsTodo.length > 0">
+				<h2 v-if="todoTasks.length > 0">
 					Today
 				</h2>
 			</div>
 			<TodoItem
-				v-for="item in itemsTodo"
+				v-for="item in todoTasks"
 				v-bind:key="item.id"
 				v-bind="item"
 				v-bind:complete="complete"
@@ -19,7 +19,7 @@
 			<div class="task-list">
 				<h2
 					v-if="
-						itemsCompleted.length > 0
+						completedTasks.length > 0
 					"
 				>
 					Completed
@@ -27,7 +27,7 @@
 			</div>
 
 			<TodoItem
-				v-for="item in itemsCompleted"
+				v-for="item in completedTasks"
 				v-bind:key="item.id"
 				v-bind="item"
 				v-bind:complete="complete"
@@ -44,30 +44,22 @@
 <script>
 import TodoItem from '@/components/TodoItem.vue'
 import Button from '@/components/Button.vue'
+import {
+	mapState,
+	mapGetters,
+} from 'vuex'
 export default {
 	name: 'Tasks',
 	components: {
 		TodoItem,
 		Button,
 	},
-	data: function() {
-		return {
-			items: JSON.parse(
-				localStorage.getItem('taskapp'),
-			).items,
-			itemsCompleted: JSON.parse(
-				localStorage.getItem('taskapp'),
-			).items.filter(
-				(item) =>
-					item.isCompleted == true,
-			),
-			itemsTodo: JSON.parse(
-				localStorage.getItem('taskapp'),
-			).items.filter(
-				(item) =>
-					item.isCompleted == false,
-			),
-		}
+	computed: {
+		...mapState(['items']),
+		...mapGetters([
+			'completedTasks',
+			'todoTasks',
+		]),
 	},
 	methods: {
 		complete: function(id) {
