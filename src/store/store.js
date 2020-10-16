@@ -90,7 +90,7 @@ export default new Vuex.Store({
     logout: () => {
       localStorage.removeItem('taskapp')
       alert('You are logged out!')
-      this.$router.push('/')
+      window.location.href = '/'
     },
     addTask: (context, task) => {
       const appdata = context.state
@@ -155,8 +155,7 @@ export default new Vuex.Store({
     },
     updateTask: (
       context,
-      id,
-      value,
+      { id, value },
     ) => {
       const appdata = context.state
       const _items = appdata.items.map(

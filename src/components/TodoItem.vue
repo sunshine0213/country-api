@@ -17,8 +17,11 @@
 				class="input-edit"
 				v-if="isEditing"
 				v-model="taskValue"
-				@blur="edit(id)"
-				v-focus
+				@blur="saveAndExit(id)"
+				v-on:keyup.enter="
+					saveAndExit(id)
+				"
+				v-focus="isEditing"
 			/>
 
 			<p
@@ -88,6 +91,10 @@ export default {
 				':' +
 				date.getMinutes('MM')
 			)
+		},
+		saveAndExit: function(id) {
+			this.edit(id)
+			this.update(id, this.taskValue)
 		},
 	},
 }
