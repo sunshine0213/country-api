@@ -114,6 +114,7 @@ export default {
 		},
 		userLogout: function() {
 			this.logout()
+			this.$router.push('/')
 		},
 	},
 }

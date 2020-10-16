@@ -63,6 +63,7 @@ export default {
 		isEditing: Boolean,
 		complete: Function,
 		edit: Function,
+		update: Function,
 	},
 	data: function() {
 		return {

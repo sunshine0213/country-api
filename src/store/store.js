@@ -13,11 +13,17 @@ export default new Vuex.Store({
   },
   getters: {
     completedTasks: (state) => {
-      return state.items.filter(item => item.isCompleted == true)
+      return state.items.filter(
+        (item) =>
+          item.isCompleted == true,
+      )
     },
     todoTasks: (state) => {
-      return state.items.filter(item => item.isCompleted == false)
-    }
+      return state.items.filter(
+        (item) =>
+          item.isCompleted == false,
+      )
+    },
   },
   mutations: {
     FECTH_FROM_LOCAL: (state, data) => {
@@ -40,8 +46,14 @@ export default new Vuex.Store({
       state.items = []
       state.isNewUser = true
     },
-    ADD_TASK: (state, task) => {
-      state.items.push(task)
+    MARK_COMPLETE: (state, items) => {
+      state.items = items
+    },
+    TOGGLE_EDIT: (state, items) => {
+      state.items = items
+    },
+    UPDATE_TASK: (state, items) => {
+      state.items = items
     },
   },
   actions: {
@@ -82,7 +94,6 @@ export default new Vuex.Store({
     },
     addTask: (context, task) => {
       const appdata = context.state
-      console.log("appdata", appdata, "task", task)
       const _items = appdata.items
       _items.push(task)
       const _appdata = {
@@ -93,7 +104,82 @@ export default new Vuex.Store({
         'taskapp',
         JSON.stringify(_appdata),
       )
-      context.commit('ADD_TASK', task)
+    },
+    markComplete: (context, id) => {
+      const appdata = context.state
+      const _items = appdata.items.map(
+        (item) => {
+          if (item.id === id) {
+            item.isCompleted = !item.isCompleted
+          }
+          return item
+        },
+      )
+
+      const _appdata = {
+        ...appdata,
+        items: _items,
+      }
+      localStorage.setItem(
+        'taskapp',
+        JSON.stringify(_appdata),
+      )
+      context.commit(
+        'MARK_COMPLETE',
+        _items,
+      )
+    },
+    toggleEdit: (context, id) => {
+      const appdata = context.state
+      const _items = appdata.items.map(
+        (item) => {
+          if (item.id === id) {
+            item.isEditing = !item.isEditing
+          }
+          return item
+        },
+      )
+
+      const _appdata = {
+        ...appdata,
+        items: _items,
+      }
+      localStorage.setItem(
+        'taskapp',
+        JSON.stringify(_appdata),
+      )
+      context.commit(
+        'TOGGLE_EDIT',
+        _items,
+      )
+    },
+    updateTask: (
+      context,
+      id,
+      value,
+    ) => {
+      const appdata = context.state
+      const _items = appdata.items.map(
+        (item) => {
+          if (item.id === id) {
+            item.task = value
+          }
+          return item
+        },
+      )
+
+      const _appdata = {
+        ...appdata,
+        items: _items,
+      }
+      localStorage.setItem(
+        'taskapp',
+        JSON.stringify(_appdata),
+      )
+      context.commit(
+        'UPDATE_TASK',
+        _items,
+      )
     },
   },
 })
