@@ -34,7 +34,7 @@
 
 		<Button
 			label="Add to the list"
-			v-bind:onClick="addTask"
+			v-bind:onClick="add"
 		/>
 		<Button
 			label="Cancel"
@@ -51,6 +51,7 @@ import InputRadio from '@/components/InputRadio.vue'
 import { uuid } from 'vue-uuid'
 import DatePicker from 'vue2-datepicker'
 import 'vue2-datepicker/index.css'
+import { mapActions } from 'vuex'
 const getTime = function() {
 	const timeValue = []
 	for (let i = 0; i < 12; i++) {
@@ -93,13 +94,14 @@ export default {
 		}
 	},
 	methods: {
+		...mapActions(['addTask']),
 		cancel: function() {
 			this.$router.go(-1)
 		},
 		radioChange: function(value) {
 			this.priority = value
 		},
-		addTask: function() {
+		add: function() {
 			if (
 				this.task == '' ||
 				this.time == '' ||
@@ -115,19 +117,8 @@ export default {
 				isEditing: false,
 				priority: this.priority,
 			}
-			let _taskapp = JSON.parse(
-				localStorage.getItem('taskapp'),
-			)
-			const _items = _taskapp.items
-			_items.push(newTask)
-			_taskapp = {
-				..._taskapp,
-				items: _items,
-			}
-			localStorage.setItem(
-				'taskapp',
-				JSON.stringify(_taskapp),
-			)
+			console.log(newTask)
+			this.addTask(newTask)
 			this.$router.push('/dashboard')
 		},
 	},
