@@ -117,7 +117,6 @@ export default {
 				isEditing: false,
 				priority: this.priority,
 			}
-			console.log(newTask)
 			this.addTask(newTask)
 			this.$router.push('/dashboard')
 		},

@@ -15,6 +15,7 @@
 				v-bind="item"
 				v-bind:complete="complete"
 				v-bind:edit="edit"
+				v-bind:update="update"
 			/>
 			<div class="task-list">
 				<h2
@@ -32,6 +33,7 @@
 				v-bind="item"
 				v-bind:complete="complete"
 				v-bind:edit="edit"
+				v-bind:update="update"
 			/>
 		</div>
 		<Button
@@ -47,6 +49,7 @@ import Button from '@/components/Button.vue'
 import {
 	mapState,
 	mapGetters,
+	mapActions,
 } from 'vuex'
 export default {
 	name: 'Tasks',
@@ -62,39 +65,21 @@ export default {
 		]),
 	},
 	methods: {
+		...mapActions([
+			'markComplete',
+			'toggleEdit',
+			'updateTask',
+		]),
 		complete: function(id) {
-			const _items = this.items.map(
-				(item) => {
-					if (item.id === id) {
-						item.isCompleted = !item.isCompleted
-					}
-					return item
-				},
-			)
-			this.items = [..._items]
-			let _taskapp = JSON.parse(
-				localStorage.getItem('taskapp'),
-			)
-			_taskapp = {
-				..._taskapp,
-				items: _items,
-			}
-			localStorage.setItem(
-				'taskapp',
-				JSON.stringify(_taskapp),
-			)
+			this.markComplete(id)
 		},
 		edit: function(id) {
-			const _items = this.items.map(
-				(item) => {
-					if (item.id === id) {
-						item.isEditing = !item.isEditing
-					}
-					return item
-				},
-			)
-			this.items = [..._items]
+			this.toggleEdit(id)
 		},
+		update: function(id, value) {
+			this.updateTask(id, value)
+		},
+
 		toAddView: function() {
 			this.$router.push(
 				'/dashboard/add',
