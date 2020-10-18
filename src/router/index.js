@@ -5,6 +5,7 @@ import Landing from '@/views/Landing.vue'
 import Tasks from '@/views/Tasks.vue'
 import AddTask from '@/views/AddTask.vue'
 import NoPage from '@/views/NoPage.vue'
+import Login from '@/views/Login.vue'
 
 Vue.use(Router)
 
@@ -13,6 +14,12 @@ const routes = [
     path: '/',
     name: 'Landing',
     component: Landing
+  },
+  {
+    path: '/login',
+    component: Login,
+
+
   },
   {
     path: '/dashboard',
