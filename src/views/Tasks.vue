@@ -1,11 +1,11 @@
 <template>
 	<div
-		v-if="items.length > 0"
+		v-if="items.length"
 		class="tasks"
 	>
 		<div class="tasks__inner">
 			<div
-				v-if="todoTasks.length > 0"
+				v-if="todoTasks.length"
 				class="task-list"
 			>
 				<h2>
@@ -24,7 +24,7 @@
 				v-bind:update="update"
 			/>
 			<div
-				v-if="completedTasks.length > 0"
+				v-if="completedTasks.length"
 				class="task-list"
 			>
 				<h2>
