@@ -6,6 +6,7 @@ import Tasks from '@/views/Tasks.vue'
 import AddTask from '@/views/AddTask.vue'
 import NoPage from '@/views/NoPage.vue'
 import Login from '@/views/Login.vue'
+import Signup from '@/views/Signup.vue'
 
 Vue.use(Router)
 
@@ -18,8 +19,10 @@ const routes = [
   {
     path: '/login',
     component: Login,
-
-
+  },
+  {
+    path: '/signup',
+    component: Signup,
   },
   {
     path: '/dashboard',

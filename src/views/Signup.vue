@@ -1,6 +1,6 @@
 <template>
-	<div class="login">
-		<h2>Login</h2>
+	<div class="signup">
+		<h2>Signup</h2>
 		<input
 			type="text"
 			placeholder="Email"
@@ -16,8 +16,8 @@
 		/>
 		<br />
 		<p v-if="error">{{ error }}</p>
-		<button v-on:click="login">
-			Login
+		<button v-on:click="signUp">
+			Signup
 		</button>
 		<p>
 			If you already have an account
@@ -30,7 +30,7 @@
 <script>
 import firebase from 'firebase'
 export default {
-	name: 'Login',
+	name: 'Signup',
 	data: function() {
 		return {
 			email: '',
@@ -39,14 +39,14 @@ export default {
 		}
 	},
 	methods: {
-		login() {
+		signUp() {
 			if (
 				this.email !== '' &&
 				this.password !== ''
 			) {
 				firebase
 					.auth()
-					.signInWithEmailAndPassword(
+					.createUserWithEmailAndPassword(
 						this.email,
 						this.password,
 					)
@@ -72,20 +72,20 @@ export default {
 }
 </script>
 <style scoped>
-.login {
+.signup {
 	margin: auto;
 	margin-top: 60px;
 	text-align: center;
 }
-.login input {
+.signup input {
 	margin: 10px;
 	padding: 10px;
 }
-.login button {
+.signup button {
 	margin: 10px;
 	padding: 10px;
 }
-.login .login__illustration {
+.signup .signup__illustration {
 	margin-bottom: 20px;
 }
 </style>
